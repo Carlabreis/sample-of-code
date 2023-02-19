@@ -2,10 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-import Input, { EMAIL_REGEX } from '../UI/FormComponents/Input';
-import PhoneInput from '../UI/FormComponents/PhoneInput';
-import SelectInput from '../UI/FormComponents/Select';
-import TextArea, { MIN_LENGTH } from '../UI/FormComponents/TextArea';
+import { EMAIL_REGEX, TEXTAREA_MIN_LENGTH, Input, PhoneInput, Select, TextArea } from '../UI/FormComponents';
 
 const ContactUsForm = () => {
   const {
@@ -46,24 +43,12 @@ const ContactUsForm = () => {
           />
         </div>
         <div className="col-md-6">
-          {/* <Select
-              label="Department"
-              register={register('selectDepartment', { required: 'Department is required' })}
-              options={['', 'Sales', 'Customer Service', 'Technical Support', 'Payment', 'Other']}
-              errors={errors.selectDepartment}
-            /> */}
-          <SelectInput
+          <Select
             label="Department"
-            register={register('selectDepartment', { required: 'Department is required' })}
-            options={[
-              { value: 'Service', label: 'Service' },
-              { value: 'Customer Service', label: 'Customer Service' },
-              { value: 'Technical Support', label: 'Technical Support' },
-              { value: 'Payment', label: 'Payment' },
-              { value: 'Other', label: 'Other' },
-            ]}
-            // defaultValue={{ label: 'Select Department', value: '' }}
+            options={['Sales', 'Customer Service', 'Technical Support', 'Payment', 'Other']}
             errors={errors.selectDepartment}
+            register={register('selectDepartment', { required: 'Department is required' })}
+            defaultValue="Select Department"
           />
         </div>
 
@@ -72,7 +57,10 @@ const ContactUsForm = () => {
             label="Message"
             register={register('textArea', {
               required: 'Message is required',
-              minLength: { value: MIN_LENGTH, message: `Message must be at least ${MIN_LENGTH} characteres long` },
+              minLength: {
+                value: TEXTAREA_MIN_LENGTH,
+                message: `Message must be at least ${TEXTAREA_MIN_LENGTH} characteres long`,
+              },
             })}
             errors={errors.textArea}
           />
